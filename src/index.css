@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/* App shell sizing */
+html, body, #root {
+  height: 100%;
+}
+/* Global static gradient background (no animation) */
+html, body, #root {
+  background-image:
+    radial-gradient(800px 400px at 10% 10%, rgba(99,102,241,0.25), transparent 60%),
+    radial-gradient(700px 350px at 90% 20%, rgba(6,182,212,0.20), transparent 60%),
+    radial-gradient(900px 450px at 50% 100%, rgba(244,63,94,0.18), transparent 60%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2ff 40%, #e0f2fe 100%);
+  background-attachment: fixed;
+}

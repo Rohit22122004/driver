@@ -1,0 +1,96 @@
+import React from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { http } from '../api/http'
+
+export default function RegisterPage() {
+  const nav = useNavigate()
+  const [phone, setPhone] = React.useState('')
+  const [username, setUsername] = React.useState('')
+  const [password, setPassword] = React.useState('')
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState<string | null>(null)
+  const [ok, setOk] = React.useState(false)
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError(null)
+    setOk(false)
+    setLoading(true)
+    try {
+      const { data } = await http.post('/api/register', { phone, username, password })
+      if (data?.ok) {
+        setOk(true)
+        setTimeout(() => nav('/login'), 800)
+      }
+    } catch (err: any) {
+      setError(err?.message || 'Registration failed')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div
+      className="min-h-screen bg-cover bg-center flex items-center justify-center p-4"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=1600&auto=format&fit=crop')",
+      }}
+    >
+      <div className="w-full max-w-md rounded-2xl border border-white/30 bg-white/10 backdrop-blur-md shadow-xl p-6 text-white">
+        <h1 className="text-2xl font-semibold text-center mb-6">Create Account</h1>
+        <form onSubmit={onSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm mb-1">Phone Number</label>
+            <input
+              className="w-full rounded-md bg-white/20 border border-white/30 px-3 py-2 placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-emerald-300"
+              placeholder="Enter phone number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              pattern="[0-9]{10,}"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm mb-1">Username</label>
+            <input
+              className="w-full rounded-md bg-white/20 border border-white/30 px-3 py-2 placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-emerald-300"
+              placeholder="Choose a username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm mb-1">Password</label>
+            <input
+              type="password"
+              className="w-full rounded-md bg-white/20 border border-white/30 px-3 py-2 placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-emerald-300"
+              placeholder="Create a password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              minLength={6}
+              required
+            />
+          </div>
+
+          {error && <div className="text-red-200 text-sm">{error}</div>}
+          {ok && <div className="text-emerald-200 text-sm">Registered! Redirecting to login…</div>}
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-md bg-blue-600 text-white hover:bg-blue-700 px-3 py-2 font-medium disabled:opacity-60"
+          >
+            {loading ? 'Registering…' : 'REGISTER'}
+          </button>
+        </form>
+
+        <div className="mt-4 text-center text-sm">
+          Already have an account?{' '}
+          <Link to="/login" className="underline font-medium">Back to Login</Link>
+        </div>
+      </div>
+    </div>
+  )
+}
