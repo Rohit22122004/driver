@@ -57,17 +57,7 @@ export default function DriverDashboard() {
             <StatCard label="Distance" value={stats.distance} suffix=" km" accent="bg-white/10" />
             <StatCard label="On‑time Rate" value={stats.onTime} suffix="%" accent="bg-white/10" />
           </div>
-          {/* Stunning CTA */}
-          <div className="mt-6">
-            <Link
-              to="/trip/planning"
-              className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-base font-semibold text-white
-                         bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 shadow-lg shadow-rose-500/30
-                         hover:from-amber-300 hover:via-orange-400 hover:to-rose-400 transition transform hover:-translate-y-0.5"
-            >
-              ✨ Plan a New Trip
-            </Link>
-          </div>
+          {/* CTA removed as per request */}
         </div>
       </section>
 
@@ -129,6 +119,18 @@ export default function DriverDashboard() {
               <ActionBtn label="Check‑in Stop" color="emerald" />
               <ActionBtn label="Call Operator" color="sky" />
               <ActionBtn label="End Trip" color="rose" />
+              <Link
+                to="/driver/confirmations"
+                className="col-span-2 h-10 rounded-lg text-white font-medium transition bg-indigo-600 hover:bg-indigo-700 grid place-items-center"
+              >
+                Create New Trip
+              </Link>
+              <Link
+                to="/driver/trip/confirmation"
+                className="col-span-2 h-10 rounded-lg text-white font-medium transition bg-emerald-600 hover:bg-emerald-700 grid place-items-center"
+              >
+                Confirm Trip
+              </Link>
             </div>
           </div>
 

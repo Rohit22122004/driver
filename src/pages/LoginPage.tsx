@@ -1,13 +1,11 @@
 import React from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { http } from '../api/http'
 
 export default function LoginPage() {
   const nav = useNavigate()
-  const [username, setUsername] = React.useState('')
+  const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
-  const [role, setRole] = React.useState<'driver'|'admin'>('driver')
-  const [remember, setRemember] = React.useState(true)
+  const [role, setRole] = React.useState<'DRIVER' | 'ADMIN' | 'PASSENGER'>('DRIVER')
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
 
@@ -16,13 +14,20 @@ export default function LoginPage() {
     setError(null)
     setLoading(true)
     try {
-      const resp = await http.post<{ ok: boolean; role: 'driver' | 'admin' }>(
-        '/api/login',
-        { username, password, remember, role }
-      )
-      const roleFromServer = resp.data?.role || 'driver'
+      const res = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, role }),
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => null)
+        throw new Error(data?.message || 'Login failed')
+      }
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; role?: string }
+      const roleFromServer = (data?.role ?? role).toString().toLowerCase()
       localStorage.setItem('role', roleFromServer)
       if (roleFromServer === 'admin') nav('/admin/dashboard')
+      else if (roleFromServer === 'passenger') nav('/passenger/plan')
       else nav('/driver/dashboard')
     } catch (err: any) {
       setError(err?.message || 'Login failed')
@@ -50,19 +55,21 @@ export default function LoginPage() {
             <select
               className="w-full rounded-md bg-white/20 border border-white/30 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-300"
               value={role}
-              onChange={(e) => setRole(e.target.value as 'driver'|'admin')}
+              onChange={(e) => setRole(e.target.value as 'DRIVER' | 'ADMIN' | 'PASSENGER')}
             >
-              <option value="driver">Driver</option>
-              <option value="admin">Admin</option>
+              <option className="bg-gray-800" value="DRIVER">DRIVER</option>
+              <option className="bg-gray-800" value="ADMIN">ADMIN</option>
+              <option className="bg-gray-800" value="PASSENGER">PASSENGER</option>
             </select>
           </div>
           <div>
-            <label className="block text-sm mb-1">Username</label>
+            <label className="block text-sm mb-1">Email</label>
             <input
+              type="email"
               className="w-full rounded-md bg-white/20 border border-white/30 px-3 py-2 placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-emerald-300"
-              placeholder="Enter username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -77,11 +84,7 @@ export default function LoginPage() {
               required
             />
           </div>
-          <div className="flex items-center justify-between text-sm">
-            <label className="inline-flex items-center gap-2">
-              <input type="checkbox" className="accent-slate-600" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
-              Remember me
-            </label>
+          <div className="flex items-center justify-end text-sm">
             <button type="button" className="opacity-75 hover:opacity-100">Forgot Password?</button>
           </div>
 
@@ -104,3 +107,4 @@ export default function LoginPage() {
     </div>
   )
 }
+

@@ -70,6 +70,22 @@ export default function AdminDashboard() {
             >
               📊 Open Monitoring
             </Link>
+            <Link
+              to="/admin/vehicles/add"
+              className="ml-3 inline-flex items-center gap-2 rounded-full px-5 py-3 text-base font-semibold text-white
+                         bg-gradient-to-r from-indigo-400 via-fuchsia-500 to-pink-500 shadow-lg shadow-pink-500/30
+                         hover:from-indigo-300 hover:via-fuchsia-400 hover:to-pink-400 transition transform hover:-translate-y-0.5"
+            >
+              🚗 Add Vehicle
+            </Link>
+            <Link
+              to="/admin/trips"
+              className="ml-3 inline-flex items-center gap-2 rounded-full px-5 py-3 text-base font-semibold text-white
+                         bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 shadow-lg shadow-indigo-600/30
+                         hover:from-sky-400 hover:via-blue-500 hover:to-indigo-500 transition transform hover:-translate-y-0.5"
+            >
+              📜 All Trips
+            </Link>
           </div>
         </div>
       </section>

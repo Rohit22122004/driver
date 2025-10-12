@@ -10,6 +10,17 @@ import MonitoringPage from './pages/MonitoringPage'
 import NotificationsPage from './pages/NotificationsPage'
 import ProfilePage from './pages/ProfilePage'
 import { useLocation } from 'react-router-dom'
+import PassengerPlanner from './pages/PassengerPlanner'
+import TripCreatePage from './pages/TripCreatePage'
+import TripDetailsPage from './pages/TripDetailsPage'
+import AvailableVehiclesPage from './pages/AvailableVehiclesPage'
+import AddVehiclePage from './pages/AddVehiclePage'
+import TripVehicleSummaryPage from './pages/TripVehicleSummaryPage'
+import TripConfirmationStatusPage from './pages/TripConfirmationStatusPage'
+import AdminConfirmationsPage from './pages/AdminConfirmationsPage'
+import DriverConfirmationPage from './pages/DriverConfirmationPage'
+import TripConfirmationPage from './pages/TripConfirmationPage'
+import DriverAssignmentsPage from './pages/DriverAssignmentsPage'
 
 function App() {
   const location = useLocation()
@@ -27,6 +38,19 @@ function App() {
 
           <Route path="/driver/dashboard" element={<DriverDashboard />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
+          <Route path="/passenger/plan" element={<PassengerPlanner />} />
+          <Route path="/passenger/trip/create" element={<TripCreatePage />} />
+          <Route path="/passenger/trip/:id" element={<TripDetailsPage />} />
+          <Route path="/passenger/trip/:id/vehicles" element={<AvailableVehiclesPage />} />
+          <Route path="/passenger/trip/:id/summary" element={<TripVehicleSummaryPage />} />
+          <Route path="/passenger/trip/:id/confirmation" element={<TripConfirmationStatusPage />} />
+          <Route path="/admin/vehicles/add" element={<AddVehiclePage />} />
+          <Route path="/admin/trips" element={<AdminConfirmationsPage />} />
+          <Route path="/driver/confirmations" element={<DriverConfirmationPage />} />
+          <Route path="/driver/trip/confirmation" element={<TripConfirmationPage />} />
+          <Route path="/driver/assignments" element={<DriverAssignmentsPage />} />
+          <Route path="/driver/assignments/:driverId" element={<DriverAssignmentsPage />} />
 
           <Route path="/trip/planning" element={<TripPlanner />} />
           <Route path="/trip/:id/map" element={<TripMapView />} />
