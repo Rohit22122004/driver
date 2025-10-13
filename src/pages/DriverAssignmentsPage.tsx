@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { GradientButton } from '@/components/ui/gradient-button'
 
 export default function DriverAssignmentsPage() {
   const { driverId: paramDriverId } = useParams<{ driverId: string }>()
@@ -37,11 +38,9 @@ export default function DriverAssignmentsPage() {
     return () => { active = false }
   }, [driverId])
 
-  const gradientBg = 'bg-gradient-to-br from-indigo-700 via-purple-700 to-emerald-600'
-
   return (
-    <div className={`min-h-screen ${gradientBg} p-4 flex items-stretch justify-center`}>
-      <div className="w-full max-w-5xl space-y-4">
+    <div className={"relative min-h-screen p-4 flex items-stretch justify-center"}>
+      <div className="w-full space-y-4">
         <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-5 text-white">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-semibold">Driver Assignments</h1>
@@ -59,13 +58,13 @@ export default function DriverAssignmentsPage() {
               {lastRefreshed && (
                 <span className="ml-2">• Last refreshed: <span className="font-mono">{new Date(lastRefreshed).toLocaleString()}</span></span>
               )}
-              <button
+              <GradientButton
                 type="button"
                 onClick={() => setDriverId((id) => id)}
-                className="ml-2 rounded px-2 py-0.5 border border-white/20 text-white/80 hover:bg-white/10"
+                className="ml-2 px-2 py-1 text-xs"
               >
                 Refresh
-              </button>
+              </GradientButton>
             </div>
           )}
 
@@ -77,14 +76,14 @@ export default function DriverAssignmentsPage() {
                 value={driverId}
                 onChange={(e) => setDriverId(e.target.value)}
               />
-              <button
+              <GradientButton
                 type="button"
                 onClick={() => setDriverId(driverId.trim())}
                 disabled={!driverId.trim()}
-                className="rounded-md bg-emerald-600 hover:bg-emerald-700 px-3 py-2 text-sm disabled:opacity-60"
+                className="px-3 py-2 text-sm disabled:opacity-60"
               >
                 Load
-              </button>
+              </GradientButton>
             </div>
           )}
 
@@ -172,6 +171,14 @@ export default function DriverAssignmentsPage() {
               <div className="mt-4 text-white/90">No data.</div>
             )
           )}
+        </div>
+        <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-5 text-white flex items-center justify-end">
+          <Link
+            to="/driver/trip/send"
+            className="rounded-md bg-indigo-600 hover:bg-indigo-700 px-4 py-2 text-sm"
+          >
+            OK
+          </Link>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import Aurora from '../components/Aurora'
+import { GradientButton } from '@/components/ui/gradient-button'
 
 type Stop = { stop: string; lat: number; lng: number }
 
@@ -27,7 +28,7 @@ export default function TripPlanner() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="relative min-h-screen p-4 space-y-8">
       {/* Hero */}
       <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-600 via-fuchsia-600 to-rose-600 text-white">
         <Aurora />
@@ -46,16 +47,16 @@ export default function TripPlanner() {
           <div className="flex items-center justify-between">
             <h3 className="font-semibold">Stops</h3>
             <div className="flex gap-2">
-              <button className="h-9 px-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700" onClick={addStop}>Add Stop</button>
-              <button className="h-9 px-3 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700" onClick={simulateOptimize}>Optimize (Mock)</button>
+              <GradientButton className="h-9 px-3 text-sm" onClick={addStop}>Add Stop</GradientButton>
+              <GradientButton className="h-9 px-3 text-sm" onClick={simulateOptimize}>Optimize (Mock)</GradientButton>
             </div>
           </div>
           <div className="mt-4 space-y-3">
             {stops.map((s, i) => (
               <div key={i} className="rounded-xl border bg-white/70 p-3 flex flex-col gap-2 md:flex-row md:items-center md:gap-2 transition">
                 <div className="flex items-center gap-2">
-                  <button className="h-8 w-8 rounded-md border hover:bg-slate-50" onClick={() => move(i, -1)}>▲</button>
-                  <button className="h-8 w-8 rounded-md border hover:bg-slate-50" onClick={() => move(i, 1)}>▼</button>
+                  <GradientButton className="h-8 w-8 p-0 text-xs" onClick={() => move(i, -1)}>▲</GradientButton>
+                  <GradientButton className="h-8 w-8 p-0 text-xs" onClick={() => move(i, 1)}>▼</GradientButton>
                 </div>
                 <input className="border rounded p-2 flex-1" value={s.stop} onChange={(e) => {
                   const ns = [...stops]; ns[i] = { ...s, stop: e.target.value }; setStops(ns)
@@ -66,7 +67,7 @@ export default function TripPlanner() {
                 <input type="number" step="0.0001" className="border rounded p-2 w-32" value={s.lng} onChange={(e) => {
                   const ns = [...stops]; ns[i] = { ...s, lng: parseFloat(e.target.value) }; setStops(ns)
                 }} />
-                <button className="text-rose-600 hover:text-rose-700" onClick={() => removeStop(i)}>Remove</button>
+                <GradientButton className="text-xs px-2 py-1" onClick={() => removeStop(i)}>Remove</GradientButton>
               </div>
             ))}
           </div>

@@ -86,6 +86,14 @@ export default function AdminDashboard() {
             >
               📜 All Trips
             </Link>
+            <Link
+              to="/admin/confirmed-trips"
+              className="ml-3 inline-flex items-center gap-2 rounded-full px-5 py-3 text-base font-semibold text-white
+                         bg-gradient-to-r from-emerald-500 via-green-600 to-teal-600 shadow-lg shadow-emerald-600/30
+                         hover:from-emerald-400 hover:via-green-500 hover:to-teal-500 transition transform hover:-translate-y-0.5"
+            >
+              ✅ Confirmed Trips
+            </Link>
           </div>
         </div>
       </section>

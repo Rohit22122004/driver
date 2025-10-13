@@ -21,6 +21,9 @@ import AdminConfirmationsPage from './pages/AdminConfirmationsPage'
 import DriverConfirmationPage from './pages/DriverConfirmationPage'
 import TripConfirmationPage from './pages/TripConfirmationPage'
 import DriverAssignmentsPage from './pages/DriverAssignmentsPage'
+import TripSendPage from './pages/TripSendPage'
+import AdminConfirmedTripsPage from './pages/AdminConfirmedTripsPage'
+// BeamsBackground removed globally
 
 function App() {
   const location = useLocation()
@@ -28,9 +31,9 @@ function App() {
   const isAuth = path.startsWith('/login') || path.startsWith('/register')
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="relative min-h-screen flex flex-col">
       <OfflineBanner />
-      <main className={isAuth ? 'flex-1' : 'flex-1 max-w-6xl mx-auto w-full px-4 py-6'}>
+      <main className={isAuth ? 'flex-1' : 'relative z-10 flex-1 w-full'}>
         <Routes>
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<LoginPage />} />
@@ -47,10 +50,12 @@ function App() {
           <Route path="/passenger/trip/:id/confirmation" element={<TripConfirmationStatusPage />} />
           <Route path="/admin/vehicles/add" element={<AddVehiclePage />} />
           <Route path="/admin/trips" element={<AdminConfirmationsPage />} />
+          <Route path="/admin/confirmed-trips" element={<AdminConfirmedTripsPage />} />
           <Route path="/driver/confirmations" element={<DriverConfirmationPage />} />
           <Route path="/driver/trip/confirmation" element={<TripConfirmationPage />} />
           <Route path="/driver/assignments" element={<DriverAssignmentsPage />} />
           <Route path="/driver/assignments/:driverId" element={<DriverAssignmentsPage />} />
+          <Route path="/driver/trip/send" element={<TripSendPage />} />
 
           <Route path="/trip/planning" element={<TripPlanner />} />
           <Route path="/trip/:id/map" element={<TripMapView />} />

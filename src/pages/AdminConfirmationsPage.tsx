@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+// static background only
+import { GradientButton } from '@/components/ui/gradient-button'
 
 interface Confirmation {
   confirmation_id?: string
@@ -50,8 +52,6 @@ export default function AdminConfirmationsPage() {
     run()
     return () => { active = false }
   }, [])
-
-  const gradientBg = 'bg-gradient-to-br from-indigo-700 via-purple-700 to-emerald-600'
 
   const getId = (c: Confirmation): string => c.confirmation_id || c.id || c._id || ''
 
@@ -135,8 +135,8 @@ export default function AdminConfirmationsPage() {
   }
 
   return (
-    <div className={`min-h-screen ${gradientBg} p-4 flex items-stretch justify-center`}>
-      <div className="w-full max-w-6xl space-y-4">
+    <div className="min-h-screen ab-page w-full p-4">
+      <div className="w-full mx-auto space-y-4">
         <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-5 text-white">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-semibold">All Trip Confirmations</h1>
@@ -144,21 +144,21 @@ export default function AdminConfirmationsPage() {
           </div>
 
           {/* Query box */}
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-2">
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-2 items-stretch">
             <input
               className="md:col-span-2 rounded-md bg-white/20 border border-white/30 px-3 py-2 placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-emerald-300 text-white"
               placeholder="Enter confirmation ID"
               value={queryId}
               onChange={(e) => setQueryId(e.target.value)}
             />
-            <button
+            <GradientButton
               type="button"
               onClick={() => confirmAssignment(queryId.trim())}
               disabled={confirming || !queryId.trim()}
-              className="rounded-md bg-emerald-600 hover:bg-emerald-700 px-3 py-2 text-sm disabled:opacity-60"
+              className="w-full h-11 min-w-0 px-3 text-sm"
             >
               {confirming ? 'Confirming…' : 'Confirm'}
-            </button>
+            </GradientButton>
           </div>
           {confirmMsg && <div className="mt-2 text-sm text-white/90">{confirmMsg}</div>}
 
@@ -190,31 +190,23 @@ export default function AdminConfirmationsPage() {
                         {field('Trip Price', c.trip_price != null ? `₹${c.trip_price}` : '—')}
                         {field('Status', c.status)}
                       </div>
-                      <div className="flex items-center gap-2">
-                        <button
+                      <div className="grid grid-cols-2 gap-2 items-stretch">
+                        <GradientButton
                           type="button"
                           onClick={() => id && onCopy(id)}
-                          className="rounded-md bg-emerald-600 hover:bg-emerald-700 px-3 py-2 text-xs"
+                          className="h-9 min-w-0 px-3 py-2 text-xs"
                           disabled={!id}
                         >
                           {copiedId === id ? 'Copied!' : 'Copy ID'}
-                        </button>
-                        <button
+                        </GradientButton>
+                        <GradientButton
                           type="button"
                           onClick={() => id && fetchDetails(id)}
-                          className="rounded-md bg-indigo-600 hover:bg-indigo-700 px-3 py-2 text-xs"
+                          className="h-9 min-w-0 px-3 py-2 text-xs"
                           disabled={!id}
                         >
                           Trip Details
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => id && deleteConfirmation(id)}
-                          className="rounded-md bg-rose-600 hover:bg-rose-700 px-3 py-2 text-xs disabled:opacity-60"
-                          disabled={!id || deletingId === id}
-                        >
-                          {deletingId === id ? 'Deleting…' : 'Delete'}
-                        </button>
+                        </GradientButton>
                       </div>
                     </div>
                   )

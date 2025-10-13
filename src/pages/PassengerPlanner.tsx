@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { GradientButton } from '@/components/ui/gradient-button'
 // Load Leaflet (JS + CSS) from CDN so no npm dependency is required
 declare global {
   interface Window { L?: any }
@@ -171,11 +172,9 @@ export default function PassengerPlanner() {
     })
   }
 
-  const gradientBg = 'bg-gradient-to-br from-indigo-700 via-purple-700 to-emerald-600'
-
   return (
-    <div className={`min-h-screen ${gradientBg} p-4 flex items-stretch justify-center`}> 
-      <div className="w-full max-w-6xl grid md:grid-cols-5 gap-4">
+    <div className={"relative min-h-screen p-4 flex items-stretch justify-center"}> 
+      <div className="w-full grid md:grid-cols-5 gap-4">
         {/* Sidebar form */}
         <div className="md:col-span-2 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-4 text-white space-y-4">
           <h1 className="text-2xl font-semibold">Passenger Trip Planner</h1>
@@ -213,13 +212,13 @@ export default function PassengerPlanner() {
                 value={newStop}
                 onChange={(e) => setNewStop(e.target.value)}
               />
-              <button
+              <GradientButton
                 type="button"
                 onClick={addStop}
-                className="rounded-md bg-emerald-500 hover:bg-emerald-600 px-3 py-2 text-white font-medium"
+                className="px-3 py-2 text-white font-medium"
               >
                 Add
-              </button>
+              </GradientButton>
             </div>
 
             {stops.length > 0 && (
@@ -227,35 +226,35 @@ export default function PassengerPlanner() {
                 {stops.map((s, idx) => (
                   <li key={idx} className="flex items-center justify-between bg-white/10 rounded-md px-3 py-2">
                     <span className="truncate">{s}</span>
-                    <button
+                    <GradientButton
                       type="button"
-                      className="text-red-200 hover:text-red-100 text-sm"
+                      className="text-sm px-2 py-1"
                       onClick={() => removeStop(idx)}
                     >
                       Remove
-                    </button>
+                    </GradientButton>
                   </li>
                 ))}
               </ul>
             )}
           </div>
 
-          <button
+          <GradientButton
             type="button"
             onClick={computeRoute}
             disabled={!leafletReady || !pickup || !destination || loadingRoute}
-            className="w-full rounded-md bg-blue-600 hover:bg-blue-700 px-3 py-2 font-medium disabled:opacity-60"
+            className="w-full"
           >
             {loadingRoute ? 'Calculating…' : 'Show Route'}
-          </button>
+          </GradientButton>
 
-          <button
+          <GradientButton
             type="button"
             onClick={goToCreateTrip}
-            className="mt-2 w-full rounded-md bg-emerald-600 hover:bg-emerald-700 px-3 py-2 font-medium text-white"
+            className="mt-2 w-full"
           >
             Plan a Trip
-          </button>
+          </GradientButton>
 
           <div className="text-sm text-white/90">
             <span className="font-medium">Total distance:</span> {distanceText || '—'}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { GradientButton } from '@/components/ui/gradient-button'
 
 export default function DriverConfirmationPage() {
   const [loading, setLoading] = React.useState(true)
@@ -40,10 +41,8 @@ export default function DriverConfirmationPage() {
     return () => { active = false }
   }, [])
 
-  const gradientBg = 'bg-gradient-to-br from-indigo-700 via-purple-700 to-emerald-600'
-
   return (
-    <div className={`min-h-screen ${gradientBg} p-4 flex items-stretch justify-center`}>
+    <div className={"relative min-h-screen p-4 flex items-stretch justify-center"}>
       <div className="w-full max-w-5xl space-y-4">
         <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-5 text-white">
           <div className="flex items-center justify-between">
@@ -59,7 +58,7 @@ export default function DriverConfirmationPage() {
               value={queryId}
               onChange={(e) => setQueryId(e.target.value)}
             />
-            <button
+            <GradientButton
               type="button"
               disabled={!queryId.trim() || driverLoading}
               onClick={async () => {
@@ -84,10 +83,10 @@ export default function DriverConfirmationPage() {
                   setDriverLoading(false)
                 }
               }}
-              className="rounded-md bg-emerald-600 hover:bg-emerald-700 px-3 py-2 text-sm disabled:opacity-60"
+              className="px-3 py-2 text-sm disabled:opacity-60"
             >
               {driverLoading ? 'Fetching…' : 'Driver ID'}
-            </button>
+            </GradientButton>
           </div>
           {driverError && <div className="mt-2 text-sm text-red-200">{driverError}</div>}
           {driverId !== null && !driverError && (

@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { GradientButton } from '@/components/ui/gradient-button'
+// static background only
 
 export default function TripConfirmationPage() {
   const [form, setForm] = React.useState({
@@ -46,11 +48,9 @@ export default function TripConfirmationPage() {
     }
   }
 
-  const gradientBg = 'bg-gradient-to-br from-indigo-700 via-purple-700 to-emerald-600'
-
   return (
-    <div className={`min-h-screen ${gradientBg} p-4 flex items-stretch justify-center`}>
-      <div className="w-full max-w-3xl space-y-4">
+    <div className="min-h-screen ab-page w-full px-4 py-6">
+      <div className="w-full max-w-3xl mx-auto space-y-4">
         <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 text-white">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-semibold">Confirm Trip</h1>
@@ -93,10 +93,9 @@ export default function TripConfirmationPage() {
               </div>
             </div>
 
-            <button type="submit" disabled={!canSubmit || submitting}
-              className="mt-2 rounded-md bg-emerald-600 hover:bg-emerald-700 px-4 py-2 text-sm disabled:opacity-60">
+            <GradientButton type="submit" disabled={!canSubmit || submitting} className="mt-2 px-4 py-2 text-sm disabled:opacity-60">
               {submitting ? 'Submitting…' : 'Confirm Trip'}
-            </button>
+            </GradientButton>
           </form>
 
           {error && <div className="mt-3 text-sm text-red-200">{error}</div>}

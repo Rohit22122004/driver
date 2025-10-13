@@ -1,5 +1,6 @@
 import React from 'react'
 import { useLocation, useNavigate, useParams, Link } from 'react-router-dom'
+import { GradientButton } from '@/components/ui/gradient-button'
 
 export default function TripConfirmationStatusPage() {
   const { id: tripId } = useParams<{ id: string }>()
@@ -60,8 +61,6 @@ export default function TripConfirmationStatusPage() {
     }
   }, [confirmationId])
 
-  const gradientBg = 'bg-gradient-to-br from-indigo-700 via-purple-700 to-emerald-600'
-
   const formatValue = (val: any): string => {
     if (val === null || val === undefined) return '—'
     if (typeof val === 'string' || typeof val === 'number' || typeof val === 'boolean') return String(val)
@@ -70,8 +69,8 @@ export default function TripConfirmationStatusPage() {
   }
 
   return (
-    <div className={`min-h-screen ${gradientBg} p-4 flex items-stretch justify-center`}>
-      <div className="w-full max-w-4xl space-y-4">
+    <div className="min-h-screen w-full px-4 py-6 bg-black">
+      <div className="w-full max-w-4xl mx-auto space-y-4">
         <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-5 text-white">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-semibold">Trip Confirmation</h1>
@@ -109,17 +108,17 @@ export default function TripConfirmationStatusPage() {
 
               {/* New action visible only after success */}
               <div className="mt-4">
-                <button
+                <GradientButton
                   type="button"
                   onClick={() => {
                     const did = (data as any)?.driver_id
                     if (did) nav(`/driver/assignments/${encodeURIComponent(String(did))}`)
                   }}
                   disabled={!((data as any)?.driver_id)}
-                  className={`rounded-md px-4 py-2 text-sm ${((data as any)?.driver_id) ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-emerald-600/50 cursor-not-allowed'}`}
+                  className="px-4 py-2 text-sm disabled:opacity-60"
                 >
                   diver confirmation
-                </button>
+                </GradientButton>
               </div>
             </div>
           )}
@@ -130,7 +129,7 @@ export default function TripConfirmationStatusPage() {
             <Link to={`/passenger/trip/${tripId}/summary`} className="rounded-md bg-blue-600 hover:bg-blue-700 px-3 py-2 text-sm">Back to Summary</Link>
             <Link to={`/passenger/trip/${tripId}`} className="rounded-md bg-slate-600 hover:bg-slate-700 px-3 py-2 text-sm">Back to Details</Link>
           </div>
-          {/* Done button removed as per request */}
+          <div className="text-sm text-white/80">Status is refreshed automatically</div>
         </div>
       </div>
     </div>

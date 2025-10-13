@@ -1,5 +1,7 @@
 import React from 'react'
 import Aurora from '../components/Aurora'
+import { GradientButton } from '@/components/ui/gradient-button'
+// static background only
 
 export default function ProfilePage() {
   const [name, setName] = React.useState('Ravi Kumar')
@@ -14,7 +16,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="min-h-screen ab-page w-full px-4 py-6 space-y-8">
       {/* Banner */}
       <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 text-white">
         <Aurora />
@@ -59,8 +61,8 @@ export default function ProfilePage() {
             </div>
 
             <div className="sm:col-span-2 flex gap-3">
-              <button className="h-10 px-4 rounded-lg bg-slate-900 text-white hover:bg-slate-800" type="submit">Save Changes</button>
-              <button className="h-10 px-4 rounded-lg border bg-white hover:bg-slate-50" type="button" onClick={() => { setName('Ravi Kumar'); setRole('Driver'); setVehicle('KA09 AB 1234') }}>Reset</button>
+              <GradientButton className="h-10 px-4" type="submit">Save Changes</GradientButton>
+              <GradientButton className="h-10 px-4" type="button" onClick={() => { setName('Ravi Kumar'); setRole('Driver'); setVehicle('KA09 AB 1234') }}>Reset</GradientButton>
             </div>
           </form>
         </div>

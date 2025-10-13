@@ -38,88 +38,122 @@ export default function RegisterPage() {
   }
 
   return (
-    <div
-      className="min-h-screen bg-cover bg-center flex items-center justify-center p-4"
-      style={{
-        backgroundImage:
-          "url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=1600&auto=format&fit=crop')",
-      }}
-    >
-      <div className="w-full max-w-md rounded-2xl border border-white/30 bg-white/10 backdrop-blur-md shadow-xl p-6 text-white">
-        <h1 className="text-2xl font-semibold text-center mb-6">Create Account</h1>
-        <form onSubmit={onSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm mb-1">Full Name</label>
-            <input
-              className="w-full rounded-md bg-white/20 border border-white/30 px-3 py-2 placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-emerald-300"
-              placeholder="Enter your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm mb-1">Email</label>
-            <input
-              type="email"
-              className="w-full rounded-md bg-white/20 border border-white/30 px-3 py-2 placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-emerald-300"
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm mb-1">Phone Number</label>
-            <input
-              className="w-full rounded-md bg-white/20 border border-white/30 px-3 py-2 placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-emerald-300"
-              placeholder="Enter phone number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              pattern="[0-9]{10,}"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm mb-1">Password</label>
-            <input
-              type="password"
-              className="w-full rounded-md bg-white/20 border border-white/30 px-3 py-2 placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-emerald-300"
-              placeholder="Create a password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              minLength={6}
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm mb-1">Role</label>
-            <select
-              className="w-full rounded-md bg-white/20 border border-white/30 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-300"
-              value={role}
-              onChange={(e) => setRole(e.target.value as 'DRIVER' | 'ADMIN' | 'PASSENGER')}
-            >
-              <option className="bg-gray-800" value="DRIVER">Driver</option>
-              <option className="bg-gray-800" value="ADMIN">Admin</option>
-              <option className="bg-gray-800" value="PASSENGER">Passenger</option>
-            </select>
-          </div>
+    <div className="relative min-h-screen w-full flex items-center justify-center text-white ab-page">
+      <div className={`cs-container active`}>
+        {/* Login mock (UI only) */}
+        <div className="cs-form-box cs-login" aria-hidden>
+          <form onSubmit={(e)=>e.preventDefault()}>
+            <h1>Login</h1>
+            <div className="cs-input-box">
+              <input className="cs-input" placeholder="Email" />
+              <span className="cs-icon" aria-hidden>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v16H4z"/><path d="M22 6L12 13 2 6"/></svg>
+              </span>
+            </div>
+            <div className="cs-input-box">
+              <input className="cs-input" type="password" placeholder="Password" />
+              <span className="cs-icon" aria-hidden>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M7 11V7a5 5 0 0 1 10 0v4"/><rect x="3" y="11" width="18" height="10" rx="2"/></svg>
+              </span>
+            </div>
+            <Link to="/login" className="cs-btn cs-outline">Go to Login</Link>
+            <p className="cs-helper">or login with social platforms</p>
+            <div className="cs-social"><a href="#">G</a><a href="#">f</a><a href="#">GH</a><a href="#">in</a></div>
+          </form>
+        </div>
 
-          {error && <div className="text-red-200 text-sm">{error}</div>}
-          {ok && <div className="text-emerald-200 text-sm">Registered! Redirecting to login…</div>}
+        {/* Register form (real API) */}
+        <div className="cs-form-box cs-register">
+          <form onSubmit={onSubmit}>
+            <h1>Registration</h1>
+            <div className="cs-input-box">
+              <input
+                className="cs-input"
+                placeholder="Username"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <span className="cs-icon" aria-hidden>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z"/></svg>
+              </span>
+            </div>
+            <div className="cs-input-box">
+              <input
+                className="cs-input"
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <span className="cs-icon" aria-hidden>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v16H4z"/><path d="M22 6L12 13 2 6"/></svg>
+              </span>
+            </div>
+            <div className="cs-input-box">
+              <input
+                className="cs-input"
+                placeholder="Phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                pattern="[0-9]{10,}"
+                required
+              />
+              <span className="cs-icon" aria-hidden>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24 11.36 11.36 0 0 0 3.56.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 7a1 1 0 0 1 1-1h2.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.56 1 1 0 0 1-.24 1.01l-2.21 2.22z"/></svg>
+              </span>
+            </div>
+            <div className="cs-input-box">
+              <input
+                className="cs-input"
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                minLength={6}
+                required
+              />
+              <span className="cs-icon" aria-hidden>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M7 11V7a5 5 0 0 1 10 0v4"/><rect x="3" y="11" width="18" height="10" rx="2"/></svg>
+              </span>
+            </div>
+            <div className="cs-input-box">
+              <select
+                className="cs-input"
+                value={role}
+                onChange={(e) => setRole(e.target.value as 'DRIVER' | 'ADMIN' | 'PASSENGER')}
+              >
+                <option value="DRIVER">Driver</option>
+                <option value="ADMIN">Admin</option>
+                <option value="PASSENGER">Passenger</option>
+              </select>
+              <span className="cs-icon" aria-hidden>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12l-8-6h16l-8 6zm0 2l8-6v10H4V8l8 6z"/></svg>
+              </span>
+            </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full rounded-md bg-blue-600 text-white hover:bg-blue-700 px-3 py-2 font-medium disabled:opacity-60"
-          >
-            {loading ? 'Registering…' : 'REGISTER'}
-          </button>
-        </form>
+            {error && <div className="cs-error" style={{color:'#e11d48'}}>{error}</div>}
+            {ok && <div className="cs-error" style={{color:'#10b981'}}>Registered! Redirecting to login…</div>}
 
-        <div className="mt-4 text-center text-sm">
-          Already have an account?{' '}
-          <Link to="/login" className="underline font-medium">Back to Login</Link>
+            <button type="submit" className="cs-btn" disabled={loading}>
+              {loading ? 'Registering…' : 'Register'}
+            </button>
+          </form>
+        </div>
+
+        {/* Toggle panels */}
+        <div className="cs-toggle-box">
+          <div className="cs-toggle-panel cs-left">
+            <h1>Hello, Welcome!</h1>
+            <p>Already have an account?</p>
+            <Link to="/login" className="cs-btn cs-outline">Login</Link>
+          </div>
+          <div className="cs-toggle-panel cs-right">
+            <h1>Welcome Back!</h1>
+            <p>Don’t have an account?</p>
+            <Link to="/login" className="cs-btn cs-outline">Login</Link>
+          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,7 @@
 import React from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
+import { GradientButton } from '@/components/ui/gradient-button'
+// static background only
 
 export default function TripDetailsPage() {
   const { id } = useParams<{ id: string }>()
@@ -50,8 +52,8 @@ export default function TripDetailsPage() {
   const gradientBg = 'bg-gradient-to-br from-indigo-700 via-purple-700 to-emerald-600'
 
   return (
-    <div className={`min-h-screen ${gradientBg} p-4 flex items-stretch justify-center`}>
-      <div className="w-full max-w-4xl space-y-4">
+    <div className="min-h-screen td-page w-full px-4 py-6">
+      <div className="w-full max-w-4xl mx-auto space-y-4">
         <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-5 text-white">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-semibold">Trip Details</h1>
@@ -78,17 +80,48 @@ export default function TripDetailsPage() {
               </div>
               <div className="space-y-3 text-sm">
                 <div className="font-medium">Response</div>
-                <div className="bg-black/20 rounded-lg p-3">
-                  {data && (
-                    <dl className="grid grid-cols-3 gap-x-3 gap-y-2">
-                      {Object.keys(data).map((k) => (
-                        <React.Fragment key={k}>
-                          <dt className="col-span-1 text-white/70">{k}</dt>
-                          <dd className="col-span-2 text-white/95 break-words">{formatValue((data as any)[k])}</dd>
-                        </React.Fragment>
-                      ))}
-                    </dl>
-                  )}
+                <div className="ht-container">
+                  <div className="ht-canvas">
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                    <div className="ht-tracker" />
+                  </div>
+                  <div className="ht-card">
+                    <div className="ht-content">
+                      {data && (
+                        <dl className="grid grid-cols-3 gap-x-3 gap-y-2">
+                          {Object.keys(data).map((k) => (
+                            <React.Fragment key={k}>
+                              <dt className="col-span-1 key">{k}</dt>
+                              <dd className="col-span-2 val break-words">{formatValue((data as any)[k])}</dd>
+                            </React.Fragment>
+                          ))}
+                        </dl>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -99,13 +132,13 @@ export default function TripDetailsPage() {
           <div className="flex items-center justify-between">
             <div className="text-white/90">Next actions</div>
             <div className="space-x-2">
-              <button
+              <GradientButton
                 type="button"
                 onClick={() => id && nav(`/passenger/trip/${id}/vehicles`)}
-                className="rounded-md bg-indigo-600 hover:bg-indigo-700 px-3 py-2 text-sm"
+                className="px-3 py-2 text-sm"
               >
                 Confirm Trip
-              </button>
+              </GradientButton>
               <Link to="/passenger/plan" className="rounded-md bg-blue-600 hover:bg-blue-700 px-3 py-2 text-sm">Back to Planner</Link>
               <Link to="/passenger/trip/create" className="rounded-md bg-emerald-600 hover:bg-emerald-700 px-3 py-2 text-sm">Plan Another Trip</Link>
             </div>

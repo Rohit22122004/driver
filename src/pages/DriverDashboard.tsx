@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Aurora from '../components/Aurora'
+import { GradientButton } from '@/components/ui/gradient-button'
 
 export default function DriverDashboard() {
   const nav = useNavigate()
@@ -20,7 +21,7 @@ export default function DriverDashboard() {
   }, [])
 
   return (
-    <div className="space-y-8">
+    <div className="relative min-h-screen p-4 space-y-8">
       {/* Hero */}
       <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white">
         <Aurora />
@@ -190,12 +191,12 @@ function InfoPill({ label, value }: { label: string; value: string }) {
 
 function ActionBtn({ label, color }: { label: string; color: 'indigo'|'emerald'|'sky'|'rose' }) {
   const colorMap: Record<string, string> = {
-    indigo: 'bg-indigo-600 hover:bg-indigo-700',
-    emerald: 'bg-emerald-600 hover:bg-emerald-700',
-    sky: 'bg-sky-600 hover:bg-sky-700',
-    rose: 'bg-rose-600 hover:bg-rose-700',
+    indigo: '',
+    emerald: '',
+    sky: '',
+    rose: '',
   }
   return (
-    <button className={`h-10 rounded-lg text-white font-medium transition ${colorMap[color]}`}>{label}</button>
+    <GradientButton className="h-10 rounded-lg text-white font-medium transition">{label}</GradientButton>
   )
 }

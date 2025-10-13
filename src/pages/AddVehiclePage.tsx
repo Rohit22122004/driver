@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { GradientButton } from '@/components/ui/gradient-button'
 
 export default function AddVehiclePage() {
   const nav = useNavigate()
@@ -36,10 +37,8 @@ export default function AddVehiclePage() {
     }
   }
 
-  const gradientBg = 'bg-gradient-to-br from-indigo-700 via-purple-700 to-emerald-600'
-
   return (
-    <div className={`min-h-screen ${gradientBg} p-4 flex items-stretch justify-center`}>
+    <div className={"relative min-h-screen p-4 flex items-stretch justify-center"}>
       <div className="w-full max-w-3xl space-y-4">
         <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 text-white">
           <h1 className="text-2xl font-semibold">Add Vehicle</h1>
@@ -71,14 +70,14 @@ export default function AddVehiclePage() {
           {success && <div className="mt-3 text-sm text-emerald-200">{success}</div>}
 
           <div className="mt-4 flex items-center gap-2">
-            <button
+            <GradientButton
               type="button"
               disabled={!canSubmit || loading}
               onClick={onSubmit}
-              className="rounded-md bg-emerald-600 hover:bg-emerald-700 px-4 py-2 font-medium disabled:opacity-60"
+              className="px-4 py-2 font-medium disabled:opacity-60"
             >
               {loading ? 'Saving…' : 'Save'}
-            </button>
+            </GradientButton>
             <Link to="/admin/dashboard" className="rounded-md bg-slate-600 hover:bg-slate-700 px-4 py-2 font-medium">Cancel</Link>
           </div>
         </div>

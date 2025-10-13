@@ -1,5 +1,6 @@
 import React from 'react'
 import Aurora from '../components/Aurora'
+import { GradientButton } from '@/components/ui/gradient-button'
 
 export default function NotificationsPage() {
   const [filter, setFilter] = React.useState<'all'|'info'|'warning'>('all')
@@ -11,7 +12,7 @@ export default function NotificationsPage() {
   const list = data.filter(d => filter === 'all' || d.type === filter)
 
   return (
-    <div className="space-y-8">
+    <div className="relative min-h-screen p-4 space-y-8">
       {/* Hero */}
       <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-pink-600 via-rose-600 to-orange-600 text-white">
         <Aurora />
@@ -27,9 +28,9 @@ export default function NotificationsPage() {
       <section className="rounded-2xl border bg-white/60 backdrop-blur p-5 shadow-sm">
         <div className="flex flex-wrap items-center gap-3">
           <span className="text-sm font-medium">Filter:</span>
-          <button className={`h-9 px-3 rounded-lg text-sm ${filter==='all'?'bg-slate-900 text-white':'bg-white hover:bg-slate-50 border'}`} onClick={() => setFilter('all')}>All</button>
-          <button className={`h-9 px-3 rounded-lg text-sm ${filter==='info'?'bg-blue-600 text-white':'bg-white hover:bg-slate-50 border'}`} onClick={() => setFilter('info')}>Info</button>
-          <button className={`h-9 px-3 rounded-lg text-sm ${filter==='warning'?'bg-amber-500 text-white':'bg-white hover:bg-slate-50 border'}`} onClick={() => setFilter('warning')}>Warning</button>
+          <GradientButton className="h-9 px-3 text-sm" onClick={() => setFilter('all')}>All</GradientButton>
+          <GradientButton className="h-9 px-3 text-sm" onClick={() => setFilter('info')}>Info</GradientButton>
+          <GradientButton className="h-9 px-3 text-sm" onClick={() => setFilter('warning')}>Warning</GradientButton>
         </div>
 
         <div className="mt-5 relative">
