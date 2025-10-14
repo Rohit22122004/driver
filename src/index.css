@@ -5,6 +5,96 @@ html, body, #root {
   height: 100%;
 }
 
+/* Uiverse Outline Hover-Text Button (uv-outline-btn) */
+.uv-outline-btn { margin: 0; height: auto; background: transparent; padding: 0; border: none; cursor: pointer; position: relative; }
+.uv-outline-btn {
+  --border-right: 6px;
+  --text-stroke-color: rgba(255,255,255,0.6);
+  --animation-color: #37FF8B;
+  --fs-size: 1.05rem;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+.uv-outline-btn .actual-text { padding: 0 .25rem; }
+.uv-outline-btn .hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: width .5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+.uv-outline-btn:hover .hover-text { width: 100%; filter: drop-shadow(0 0 23px var(--animation-color)); }
+.uv-outline-btn:disabled { opacity: .6; cursor: not-allowed; }
+
+/* Confirmation Card (cc-*) - gradient border glow card */
+.cc-card {
+  position: relative;
+  width: 100%;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 12px;
+  gap: 12px;
+  border-radius: 8px;
+  color: #fff;
+}
+.cc-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -5px;
+  margin: auto;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  border-radius: 10px;
+  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
+  z-index: -10;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.cc-card::after {
+  content: '';
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
+  transform: translate3d(0,0,0) scale(0.95);
+  filter: blur(20px);
+  border-radius: 10px;
+}
+.cc-card .cc-heading { font-size: 20px; text-transform: capitalize; font-weight: 700; margin: 0; }
+.cc-card:hover::after { filter: blur(30px); }
+.cc-card:hover::before { transform: rotate(-90deg) scaleX(1.34) scaleY(0.77); }
+
+/* Truck Loader (tl-*) */
+.tl-loader { width: fit-content; height: fit-content; display: flex; align-items: center; justify-content: center; }
+.tl-truckWrapper { width: 200px; height: 100px; display: flex; flex-direction: column; position: relative; align-items: center; justify-content: flex-end; overflow-x: hidden; }
+.tl-truckBody { width: 130px; height: fit-content; margin-bottom: 6px; animation: tl-motion 1s linear infinite; }
+@keyframes tl-motion { 0% { transform: translateY(0);} 50% { transform: translateY(3px);} 100% { transform: translateY(0);} }
+.tl-truckTires { width: 130px; height: fit-content; display: flex; align-items: center; justify-content: space-between; padding: 0 10px 0 15px; position: absolute; bottom: 0; }
+.tl-truckTires .tiresvg { width: 24px; }
+.tl-road { width: 100%; height: 1.5px; background-color: #282828; position: relative; bottom: 0; align-self: flex-end; border-radius: 3px; }
+.tl-road::before { content: ""; position: absolute; width: 20px; height: 100%; background-color: #282828; right: -50%; border-radius: 3px; animation: tl-roadMove 1.4s linear infinite; border-left: 10px solid white; }
+.tl-road::after { content: ""; position: absolute; width: 10px; height: 100%; background-color: #282828; right: -65%; border-radius: 3px; animation: tl-roadMove 1.4s linear infinite; border-left: 4px solid white; }
+.tl-lampPost { position: absolute; bottom: 0; right: -90%; height: 90px; animation: tl-roadMove 1.4s linear infinite; }
+@keyframes tl-roadMove { 0% { transform: translateX(0);} 100% { transform: translateX(-350px);} }
+
+/* Ultra-compact glow card (uc-*) */
+.uc-card { position: relative; overflow: hidden; border-radius: 12px; background: #3d3c3d; box-shadow: 0 25px 40px rgba(0,0,0,.35); padding: 2px; width: 100%; min-height: 120px; }
+.uc-inner { position: relative; width: 100%; display: flex; align-items: stretch; justify-content: flex-start; color: #fff; background: #323132; border-radius: 10px; opacity: .95; z-index: 1; padding: 12px; }
+.uc-inner.uc-content { padding: 12px; }
+.uc-glow { position: absolute; width: 140%; height: 120%; background: #fff; filter: blur(50px); left: -50%; top: -50%; z-index: 0; }
+
 /* Voltage Button (per user design) */
 .voltage-button { position: relative; display: inline-block; }
 .voltage-button > button {
@@ -335,6 +425,12 @@ html, body {
 .tvs-page {
   background: #000000;
   background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(97, 115, 56, 1) 100%, rgba(9, 9, 121, 1) 100%, rgba(116, 147, 153, 1) 100%);
+}
+
+/* Trip Confirmation page background (tcs-page) */
+.tcs-page {
+  background: #dedcd5;
+  background: radial-gradient(circle, rgba(222, 220, 213, 1) 0%, rgba(97, 115, 56, 1) 100%, rgba(9, 9, 121, 1) 100%, rgba(116, 147, 153, 1) 100%);
 }
 
 /* Magic Card (mc-*) */
