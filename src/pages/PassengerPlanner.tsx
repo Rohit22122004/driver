@@ -256,6 +256,14 @@ export default function PassengerPlanner() {
             Plan a Trip
           </GradientButton>
 
+          <GradientButton
+            type="button"
+            onClick={() => nav('/passenger/track')}
+            className="mt-2 w-full"
+          >
+            Track
+          </GradientButton>
+
           <div className="text-sm text-white/90">
             <span className="font-medium">Total distance:</span> {distanceText || '—'}
           </div>

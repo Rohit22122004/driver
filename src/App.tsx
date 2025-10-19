@@ -22,7 +22,10 @@ import DriverConfirmationPage from './pages/DriverConfirmationPage'
 import TripConfirmationPage from './pages/TripConfirmationPage'
 import DriverAssignmentsPage from './pages/DriverAssignmentsPage'
 import TripSendPage from './pages/TripSendPage'
+import ShareTrackingPage from './pages/ShareTrackingPage'
 import AdminConfirmedTripsPage from './pages/AdminConfirmedTripsPage'
+import PassengerTrackPage from './pages/PassengerTrackPage'
+import DriverRoutePlanner from './pages/DriverRoutePlanner'
 // BeamsBackground removed globally
 
 function App() {
@@ -48,6 +51,7 @@ function App() {
           <Route path="/passenger/trip/:id/vehicles" element={<AvailableVehiclesPage />} />
           <Route path="/passenger/trip/:id/summary" element={<TripVehicleSummaryPage />} />
           <Route path="/passenger/trip/:id/confirmation" element={<TripConfirmationStatusPage />} />
+          <Route path="/passenger/track" element={<PassengerTrackPage />} />
           <Route path="/admin/vehicles/add" element={<AddVehiclePage />} />
           <Route path="/admin/trips" element={<AdminConfirmationsPage />} />
           <Route path="/admin/confirmed-trips" element={<AdminConfirmedTripsPage />} />
@@ -56,6 +60,8 @@ function App() {
           <Route path="/driver/assignments" element={<DriverAssignmentsPage />} />
           <Route path="/driver/assignments/:driverId" element={<DriverAssignmentsPage />} />
           <Route path="/driver/trip/send" element={<TripSendPage />} />
+          <Route path="/driver/share" element={<ShareTrackingPage />} />
+          <Route path="/driver/routing" element={<DriverRoutePlanner />} />
 
           <Route path="/trip/planning" element={<TripPlanner />} />
           <Route path="/trip/:id/map" element={<TripMapView />} />

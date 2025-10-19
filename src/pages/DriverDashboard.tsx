@@ -132,6 +132,18 @@ export default function DriverDashboard() {
               >
                 Confirm Trip
               </Link>
+              <Link
+                to="/driver/share"
+                className="col-span-2 h-10 rounded-lg text-white font-medium transition bg-sky-600 hover:bg-sky-700 grid place-items-center"
+              >
+                Share Live Tracking
+              </Link>
+              <Link
+                to="/driver/routing"
+                className="col-span-2 h-10 rounded-lg text-white font-medium transition bg-violet-600 hover:bg-violet-700 grid place-items-center"
+              >
+                Routing
+              </Link>
             </div>
           </div>
 
